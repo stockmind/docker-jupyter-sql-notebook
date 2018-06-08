@@ -19,6 +19,7 @@ NETWORK="jupyterpostgres"
 NOTEBOOKPORT=12345
 DBPORT=12346
 
+DBUSER="postgres"
 DBPASSWORD="root"
 
 NOTEBOOKPACKAGE="stockmind/docker-jupyter-sql-notebook"
@@ -41,7 +42,7 @@ else
 	docker pull "$NOTEBOOKPACKAGE"
 	
 	echo "Create containers..."
-	docker run --name "$DBCONTAINER" -d -e MYSQL_DATABASE="$DBCONTAINER" -e MYSQL_ROOT_PASSWORD="$DBPASSWORD" -p "$DBPORT":3306 --network "$NETWORK" "$DBPACKAGE"
+	docker run --name "$DBCONTAINER" -d -e POSTGRES_DB="$DBUSER" -e POSTGRES_USER="$DBUSER" -e POSTGRES_PASSWORD="$DBPASSWORD" -p "$DBPORT":3306 --network "$NETWORK" "$DBPACKAGE"
 	docker run --name "$NOTEBOOKCONTAINER" -d -v "$NOTEBOOKFOLDER":/home/jovyan/work -p "$NOTEBOOKPORT":8888 --network "$NETWORK" "$NOTEBOOKPACKAGE"
 fi	
 
