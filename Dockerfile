@@ -17,7 +17,7 @@ RUN pip install psycopg2-binary
 # Useful plugins
 RUN pip install hide_code
 
-RUN pip install jupyter_contrib_nbextensions
+RUN pip install jupyter_contrib_nbextensions yapf
 
 USER root
 
