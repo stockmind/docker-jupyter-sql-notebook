@@ -12,4 +12,4 @@ RUN pip install psycopg2-binary
 
 # Themes
 RUN pip install jupyterthemes
-RUN jt -t monokai
+RUN jt -t monokai -f hack
