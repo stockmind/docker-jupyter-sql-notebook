@@ -23,6 +23,6 @@ RUN jupyter nbextension install --py hide_code
 RUN jupyter nbextension enable --py hide_code
 RUN jupyter serverextension enable --py hide_code
 
-RUN jupyter contrib nbextension install --user
+RUN jupyter contrib nbextension install --system
 
 RUN fix-permissions $JULIA_PKGDIR $CONDA_DIR/share/jupyter
