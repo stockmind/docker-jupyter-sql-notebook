@@ -2,7 +2,7 @@ FROM jupyter/datascience-notebook
 
 LABEL maintainer="Simone Roberto Nunzi <simone.roberto.nunzi@gmail.com>"
 
-USER root
+USER $NB_UID
 
 # SQL magic
 RUN pip install sql_magic
@@ -19,3 +19,5 @@ RUN pip install hide_code
 RUN jupyter nbextension install --py hide_code
 RUN jupyter nbextension enable --py hide_code
 RUN jupyter serverextension enable --py hide_code
+
+RUN fix-permissions $JULIA_PKGDIR $CONDA_DIR/share/jupyter
