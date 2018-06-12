@@ -11,8 +11,8 @@ RUN pip install sql_magic
 RUN pip install psycopg2-binary
 
 # Themes
-RUN pip install jupyterthemes
-RUN jt -t monokai -f hack
+# RUN pip install jupyterthemes
+# RUN jt -t monokai -f hack
 
 # Useful plugins
 RUN pip install hide_code
