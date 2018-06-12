@@ -15,13 +15,20 @@ RUN pip install psycopg2-binary
 # RUN jt -t onedork -f hack
 
 # Useful plugins
-RUN pip install hide_code && \
-    apt update && \
-    apt install -y wkhtmltopdf python-pdfkit
+RUN pip install hide_code
 
 RUN pip install jupyter_contrib_nbextensions
 
 USER root
+
+RUN apt update && \
+    apt install -y wkhtmltopdf python-pdfkit
+
+# Fix missing X server for hide_code PDF wkhtmltopdf export
+RUN apt-get install xvfb && \
+	printf '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf -q $*' > /usr/bin/wkhtmltopdf.sh && \
+	chmod a+x /usr/bin/wkhtmltopdf.sh && \
+	ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 
 RUN jupyter nbextension install --py hide_code && \
     jupyter nbextension enable --py hide_code && \
