@@ -10,7 +10,7 @@ An example script to setup a PostgreSQL env is provided in `examples/postgres.sh
 
 The script will launch and setup containers required to a fully working Jupyter and PostgreSQL env.
 
-Then into notebook use to connect:
+Then into notebook use this snippet to connect:
 ```
 %load_ext sql_magic
 import pandas.io.sql as psql
