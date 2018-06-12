@@ -46,7 +46,12 @@ else
 	docker run --name "$NOTEBOOKCONTAINER" -d -v "$NOTEBOOKFOLDER":/home/jovyan/work -p "$NOTEBOOKPORT":8888 --network "$NETWORK" "$NOTEBOOKPACKAGE"
 fi	
 
-TOKEN=$(docker exec -i "$NOTEBOOKCONTAINER" /opt/conda/bin/jupyter notebook list | grep token | sed 's|.*token=\(.*\)::.*|\1|')
+TOKEN=""
+
+while [ -z "$TOKEN" ]; do
+	sleep 1
+	TOKEN=$(docker exec -i "$NOTEBOOKCONTAINER" /opt/conda/bin/jupyter notebook list | grep token | sed 's|.*token=\(.*\)::.*|\1|')
+done
 
 echo -e "Database on port ${GREEN}$DBPORT${NC}.\n${BLUE}http://127.0.0.1:$DBPORT${NC}"
 echo -e "Web on port ${GREEN}$NOTEBOOKPORT${NC}.\n${BLUE}http://127.0.0.1:$NOTEBOOKPORT?token=$TOKEN${NC}"
