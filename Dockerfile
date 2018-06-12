@@ -6,4 +6,4 @@ USER root
 
 RUN pip install sql_magic
 
-RUN pip install psycopg2
+RUN pip install psycopg2-binary
