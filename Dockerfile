@@ -40,6 +40,7 @@ RUN jupyter nbextension enable --system codefolding/main && \
     jupyter nbextension enable --system ruler/main && \
     jupyter nbextension enable --system table_beautifier/main && \
     jupyter nbextension enable --system code_prettify/code_prettify && \
-    jupyter nbextension enable --system freeze/main
+    jupyter nbextension enable --system freeze/main && \
+    jupyter nbextension enable --system varInspector/main
 
 RUN fix-permissions $JULIA_PKGDIR $CONDA_DIR/share/jupyter
